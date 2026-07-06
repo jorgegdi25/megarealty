@@ -1,142 +1,215 @@
-.page {
-  --background: #fafafa;
-  --foreground: #fff;
-
-  --text-primary: #000;
-  --text-secondary: #666;
-
-  --button-primary-hover: #383838;
-  --button-secondary-hover: #f2f2f2;
-  --button-secondary-border: #ebebeb;
-
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-geist-sans);
-  background-color: var(--background);
-}
-
 .main {
+  min-height: 100vh;
+}
+
+/* --- Hero Section --- */
+.hero {
+  height: 100vh;
+  min-height: 600px;
+  background: var(--color-bg-dark);
+  color: var(--color-text-white);
+  position: relative;
   display: flex;
-  flex: 1;
-  width: 100%;
-  max-width: 800px;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: space-between;
-  background-color: var(--foreground);
-  padding: 120px 60px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding-top: var(--nav-height);
+  overflow: hidden;
 }
 
-.intro {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  text-align: left;
-  gap: 24px;
+.heroBackground {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: url('/images/hero-bg.jpg'); /* We will add this image later */
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  opacity: 0.4;
 }
 
-.intro h1 {
-  max-width: 320px;
-  font-size: 40px;
-  font-weight: 600;
-  line-height: 48px;
-  letter-spacing: -2.4px;
-  text-wrap: balance;
-  color: var(--text-primary);
+.heroContent {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  padding: 0 var(--space-lg);
 }
 
-.intro p {
-  max-width: 440px;
-  font-size: 18px;
-  line-height: 32px;
-  text-wrap: balance;
-  color: var(--text-secondary);
+.heroTitle {
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  letter-spacing: -0.02em;
+  margin-bottom: var(--space-md);
+  text-transform: uppercase;
 }
 
-.intro a {
-  font-weight: 500;
-  color: var(--text-primary);
+.heroSubtitle {
+  font-size: 1.2rem;
+  color: #ccc;
+  margin-bottom: var(--space-xl);
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
-.ctas {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  max-width: 440px;
-  gap: 16px;
-  font-size: 14px;
+/* --- About Section --- */
+.about {
+  background: var(--color-bg-light);
 }
 
-.ctas a {
+.aboutGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3xl);
+  align-items: center;
+}
+
+.aboutText h2 {
+  margin-bottom: var(--space-md);
+  color: var(--color-accent);
+}
+
+.aboutText p {
+  margin-bottom: var(--space-lg);
+  font-size: 1.1rem;
+}
+
+.aboutImage {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 40px;
-  padding: 0 16px;
-  border-radius: 128px;
-  border: 1px solid transparent;
-  transition: 0.2s;
-  cursor: pointer;
-  width: fit-content;
-  font-weight: 500;
 }
 
-a.primary {
-  background: var(--text-primary);
-  color: var(--background);
-  gap: 8px;
+.aboutImage img {
+  max-width: 400px;
+  width: 100%;
 }
 
-a.secondary {
-  border-color: var(--button-secondary-border);
+/* --- Listings Preview --- */
+.listings {
+  background: var(--color-bg);
 }
 
-/* Enable hover only on non-touch devices */
-@media (hover: hover) and (pointer: fine) {
-  a.primary:hover {
-    background: var(--button-primary-hover);
-    border-color: transparent;
-  }
-
-  a.secondary:hover {
-    background: var(--button-secondary-hover);
-    border-color: transparent;
-  }
+.listingsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: var(--space-xl);
+  margin-top: var(--space-2xl);
 }
 
-@media (max-width: 600px) {
-  .main {
-    padding: 48px 24px;
-  }
-
-  .intro {
-    gap: 16px;
-  }
-
-  .intro h1 {
-    font-size: 32px;
-    line-height: 40px;
-    letter-spacing: -1.92px;
-  }
+.propertyCard {
+  background: var(--color-text-white);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
 }
 
-@media (prefers-color-scheme: dark) {
-  .logo {
-    filter: invert();
+.propertyCard:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+.propertyImage {
+  height: 240px;
+  background: #e0e0e0;
+  position: relative;
+}
+
+.propertyContent {
+  padding: var(--space-md);
+}
+
+.propertyPrice {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-accent);
+  margin-bottom: var(--space-xs);
+}
+
+.propertyTitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: var(--space-sm);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.propertyDetails {
+  display: flex;
+  gap: var(--space-md);
+  color: var(--color-text-light);
+  font-size: 0.9rem;
+  margin-bottom: var(--space-lg);
+}
+
+/* --- Feature Sections (Build & Invest) --- */
+.featureSection {
+  background: var(--color-bg-light);
+}
+
+.featureGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4xl);
+  align-items: center;
+}
+
+.featureGrid.reverse {
+  direction: rtl;
+}
+
+.featureGrid.reverse > * {
+  direction: ltr;
+}
+
+.featureContent h2 {
+  margin-bottom: var(--space-md);
+}
+
+.featureList {
+  margin-top: var(--space-lg);
+}
+
+.featureList li {
+  position: relative;
+  padding-left: 2rem;
+  margin-bottom: var(--space-md);
+  font-size: 1.1rem;
+  color: var(--color-text-light);
+}
+
+.featureList li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--color-accent);
+  font-weight: bold;
+}
+
+.featureImageWrapper {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-xl);
+}
+
+.featureImageWrapper img {
+  width: 100%;
+  height: auto;
+  transition: transform 0.8s ease;
+}
+
+.featureImageWrapper:hover img {
+  transform: scale(1.05);
+}
+
+@media (max-width: 900px) {
+  .aboutGrid, .featureGrid {
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
   }
-
-  .page {
-    --background: #000;
-    --foreground: #000;
-
-    --text-primary: #ededed;
-    --text-secondary: #999;
-
-    --button-primary-hover: #ccc;
-    --button-secondary-hover: #1a1a1a;
-    --button-secondary-border: #1a1a1a;
+  
+  .featureGrid.reverse {
+    direction: ltr;
   }
 }
