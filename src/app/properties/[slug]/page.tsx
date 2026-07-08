@@ -109,20 +109,29 @@ export default async function PropertyDetailPage({ params }: { params: Promise<{
               <h3>Interested in this property?</h3>
               <p style={{ marginBottom: '1.5rem', color: '#666' }}>Contact our agents for more details or to schedule a showing.</p>
               
-              <form className={styles.contactForm}>
+              <form 
+                className={styles.contactForm}
+                action="https://formsubmit.co/epenaloza@magarealtyinternational.com" 
+                method="POST"
+              >
+                {/* Asunto automático y anti-spam */}
+                <input type="hidden" name="_subject" value={`New Inquiry for ${property.title}`} />
+                <input type="text" name="_honey" style={{ display: 'none' }} />
+                <input type="hidden" name="_captcha" value="false" />
+
                 <div className={styles.inputGroup}>
-                  <input type="text" placeholder="Your Name" required />
+                  <input type="text" name="name" placeholder="Your Name" required />
                 </div>
                 <div className={styles.inputGroup}>
-                  <input type="email" placeholder="Your Email" required />
+                  <input type="email" name="email" placeholder="Your Email" required />
                 </div>
                 <div className={styles.inputGroup}>
-                  <input type="tel" placeholder="Phone Number" required />
+                  <input type="tel" name="phone" placeholder="Phone Number" required />
                 </div>
                 <div className={styles.inputGroup}>
-                  <textarea placeholder="Message" rows={4} required defaultValue={`I am interested in ${property.title} ${property.mlsNumber ? `(MLS# ${property.mlsNumber})` : ''}`} />
+                  <textarea name="message" placeholder="Message" rows={4} required defaultValue={`I am interested in ${property.title} ${property.mlsNumber ? `(MLS# ${property.mlsNumber})` : ''}`} />
                 </div>
-                <button type="button" className="btn btn-primary" style={{ width: '100%', marginTop: '0.5rem' }}>
+                <button type="submit" className="btn btn-primary" style={{ width: '100%', marginTop: '0.5rem' }}>
                   Send Message
                 </button>
               </form>
