@@ -40,7 +40,7 @@ export default function Footer() {
             </div>
             <div className={styles.contactItem}>
               <span>✉️</span>
-              <a href="mailto:info@megarealtyinternational.com">info@megarealtyinternational.com</a>
+              <a href="mailto:epenaloza@magarealtyinternational.com">epenaloza@magarealtyinternational.com</a>
             </div>
           </div>
         </div>

@@ -93,6 +93,12 @@ export const property = defineType({
       type: 'string',
     }),
     defineField({
+      name: 'externalLink',
+      title: 'External Listing Link (OneHome, etc.)',
+      type: 'url',
+      description: 'Link to the external property portal.',
+    }),
+    defineField({
       name: 'images',
       title: 'Images',
       type: 'array',

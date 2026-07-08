@@ -1,8 +1,31 @@
+import Image from 'next/image';
 import Link from 'next/link';
+import { client, urlFor } from '@/sanity/client';
 import styles from '../properties.module.css';
 import pageStyles from '../../page.module.css';
 
-export default function ForRentPage() {
+export const revalidate = 60;
+
+export default async function ForRentPage() {
+  const query = `*[_type == "property" && listingType == "for-rent"] | order(_createdAt desc) {
+    _id,
+    title,
+    slug,
+    price,
+    bedrooms,
+    bathrooms,
+    sqft,
+    propertyType,
+    mlsNumber,
+    images
+  }`;
+  
+  const properties = await client.fetch(query);
+
+  const formatPrice = (price: number) => {
+    return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(price) + ' / mo';
+  };
+
   return (
     <div className={pageStyles.main}>
       <div className={styles.heroBanner}>
@@ -23,24 +46,39 @@ export default function ForRentPage() {
       <section className="section">
         <div className="container">
           <div className={styles.grid}>
-            {/* Placeholder data until Sanity is connected */}
-            {[1, 2].map((item) => (
-              <div key={item} className={pageStyles.propertyCard}>
-                <div className={pageStyles.propertyImage}>
-                  {/* Image placeholder */}
+            {properties.length === 0 && (
+              <p style={{ textAlign: 'center', gridColumn: '1 / -1' }}>No properties for rent found.</p>
+            )}
+            
+            {properties.map((property: any) => (
+              <div key={property._id} className={pageStyles.propertyCard}>
+                <div className={pageStyles.propertyImage} style={{ position: 'relative' }}>
+                  {property.images && property.images.length > 0 ? (
+                    <Image 
+                      src={urlFor(property.images[0]).url()} 
+                      alt={property.title}
+                      fill
+                      style={{ objectFit: 'cover' }}
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                    />
+                  ) : (
+                    <div style={{ width: '100%', height: '100%', background: '#eee', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#aaa' }}>
+                      No Photo
+                    </div>
+                  )}
                 </div>
                 <div className={pageStyles.propertyContent}>
-                  <div className={pageStyles.propertyPrice}>$3,500 / mo</div>
-                  <h3 className={pageStyles.propertyTitle}>789 Ocean Drive Apt 4B</h3>
+                  <div className={pageStyles.propertyPrice}>{formatPrice(property.price)}</div>
+                  <h3 className={pageStyles.propertyTitle}>{property.title}</h3>
                   <div className={pageStyles.propertyDetails}>
-                    <span>2 Beds</span>
-                    <span>2 Baths</span>
-                    <span>1,200 sqft</span>
+                    {property.bedrooms && <span>{property.bedrooms} Beds</span>}
+                    {property.bathrooms && <span>{property.bathrooms} Baths</span>}
+                    {property.sqft && <span>{property.sqft.toLocaleString()} sqft</span>}
                   </div>
                   <p style={{ fontSize: '0.9rem', color: '#666', marginBottom: '1rem' }}>
-                    Condo • MLS# R4455667
+                    {property.propertyType || 'Property'} {property.mlsNumber && `• MLS# ${property.mlsNumber}`}
                   </p>
-                  <Link href={`/properties/rent-${item}`} className="btn btn-outline" style={{ width: '100%' }}>
+                  <Link href={`/properties/${property.slug.current}`} className="btn btn-outline" style={{ width: '100%' }}>
                     See more
                   </Link>
                 </div>

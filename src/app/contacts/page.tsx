@@ -23,10 +23,11 @@ export default function ContactsPage() {
               <div className={styles.mapContainer}>
                 {/* Google Maps Embed iframe */}
                 <iframe 
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3561.428482436323!2d-81.95689108496464!3d26.634676683248386!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88db421867ddbe57%3A0xc331dddf6389f4dc!2s1423%20SE%2016th%20Pl%20%23101%2C%20Cape%20Coral%2C%20FL%2033990!5e0!3m2!1sen!2sus!4v1680000000000!5m2!1sen!2sus" 
+                  src="https://maps.google.com/maps?q=2210%20Cleveland%20Ave%20Fort%20Myers%20FL%2033901&t=&z=15&ie=UTF8&iwloc=&output=embed" 
                   allowFullScreen 
                   loading="lazy" 
                   referrerPolicy="no-referrer-when-downgrade"
+                  style={{ border: 0, width: '100%', height: '100%' }}
                 />
               </div>
 
@@ -35,7 +36,7 @@ export default function ContactsPage() {
                   <span className={styles.icon}>📍</span>
                   <div className={styles.infoText}>
                     <h4>Office Address</h4>
-                    <p>1423 SE 16th Pl, Ste #101<br/>Cape Coral, FL 33990</p>
+                    <p>2210 Cleveland Ave<br/>Fort Myers, FL 33901</p>
                   </div>
                 </div>
                 
@@ -51,7 +52,7 @@ export default function ContactsPage() {
                   <span className={styles.icon}>✉️</span>
                   <div className={styles.infoText}>
                     <h4>Email</h4>
-                    <p>info@megarealtyinternational.com</p>
+                    <p>epenaloza@magarealtyinternational.com</p>
                   </div>
                 </div>
               </div>
