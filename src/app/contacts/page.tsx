@@ -66,18 +66,26 @@ export default function ContactsPage() {
                   <strong>Have questions or need assistance?</strong> Fill out the form below and one of our real estate professionals will get back to you shortly.
                 </p>
 
-                <form className={styles.form}>
+                <form 
+                  className={styles.form} 
+                  action="https://formsubmit.co/epenaloza@magarealtyinternational.com" 
+                  method="POST"
+                >
+                  {/* Opciones extra para evitar spam y captcha */}
+                  <input type="text" name="_honey" style={{ display: 'none' }} />
+                  <input type="hidden" name="_captcha" value="false" />
+                  
                   <div className={styles.inputGroup}>
-                    <input type="text" placeholder="Name" required />
+                    <input type="text" name="name" placeholder="Name" required />
                   </div>
                   <div className={styles.inputGroup}>
-                    <input type="email" placeholder="Email" required />
+                    <input type="email" name="email" placeholder="Email" required />
                   </div>
                   <div className={styles.inputGroup}>
-                    <input type="tel" placeholder="Phone Number" required />
+                    <input type="tel" name="phone" placeholder="Phone Number" required />
                   </div>
                   <div className={styles.inputGroup}>
-                    <select required defaultValue="">
+                    <select name="subject" required defaultValue="">
                       <option value="" disabled>Subject / Inquiry Type</option>
                       <option value="buy">Looking to Buy</option>
                       <option value="sell">Looking to Sell</option>
@@ -87,7 +95,7 @@ export default function ContactsPage() {
                     </select>
                   </div>
                   <div className={styles.inputGroup}>
-                    <textarea placeholder="Message" rows={6} required></textarea>
+                    <textarea name="message" placeholder="Message" rows={6} required></textarea>
                   </div>
                   <button type="submit" className={`btn btn-primary ${styles.submitBtn}`}>
                     Send
